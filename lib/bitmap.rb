@@ -61,18 +61,24 @@ class Canvas
     sorted_rows = [row_1, row_2].sort
     # this line takes 2 numbers(rows) and generates an array of all numbers between and inclusive of the 2 numbers(rows)
     all_rows = (row_1..row_2).grep row_1..row_2
-    column = column
     all_rows.each_with_index do |index, row|
       @structure[index][column-1] = colour
     end
   end
 
+  def horizontal_segment(column_1, column_2, row, colour)
+    sorted_rows = [column_1, column_2].sort
+    # this line takes 2 numbers(columns) and generates an array of all numbers between and inclusive of the 2 numbers(columns)
+    all_columns = (column_1..column_2).grep column_1..column_2
+
+    @structure[row].each_with_index do |e, index|
+      # if index is a match with a number from all_columns, change that element
+      if all_columns.include?(index+1)
+        @structure[row][index] = colour
+        binding.pry
+      end
+    end
+  end
 end
 
-
-# TESTING CODE
-# canvas = Canvas.new
-# canvas.create_canvas(10,10)
-# puts canvas.structure
-# canvas.show_canvas
 

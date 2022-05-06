@@ -35,6 +35,8 @@ until running == false
   elsif input[0] == 'H' && input.match?(/\A[a-zA-z]\s\d{1,3}\s\d{1,3}\s\d{1,3}\s[a-zA-z]\z$/)
     # Draw a horizontal segment of colour C in row Y between columns X1 and X2 (inclusive).
     puts 'Succesful trigger of the H command'
+    input_to_numbers = input.split(' ').map{ |string| string.to_i}
+    @canvas.horizontal_segment(input_to_numbers[1], input_to_numbers[2], input_to_numbers[3], input[-1])
 
   elsif input[0] == 'F' && input.match?(/\A[a-zA-z]\s\d{1,3}\s\d{1,3}\s[a-zA-z]$/)
     # Fill the region R with the colour C. R is defined as:
