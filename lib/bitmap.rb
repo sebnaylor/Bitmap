@@ -1,3 +1,4 @@
+require 'pry'
 # Plan:
 
 # Initialise a running variable that will hold the session
@@ -22,7 +23,7 @@
 
   
 class Canvas 
-  attr_reader :structure
+  attr_accessor :structure
 
   def initialize
     @structure = {}
@@ -31,8 +32,8 @@ class Canvas
   def create_canvas(rows, columns)
     array = Array.new
     rows.times do |index|
-      @structure[index + 1] = array.push("O")
-    end
+      @structure[index + 1] = Array.new(columns, "O")
+    end    
   end
 
   def show_canvas
@@ -41,8 +42,11 @@ class Canvas
     end
   end
 
-
-
+  def integer_size_check(array)
+    array.each{ |number| number >= 0 && number <= 250 ? check = true : check = false }
+    return check
+    binding.pry
+  end
 end
 
 
