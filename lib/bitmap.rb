@@ -42,6 +42,15 @@ class Canvas
     end
   end
 
+  def clear_canvas
+    binding.pry
+    @structure
+  end
+
+  def colour_pixel(row, column, colour)
+    binding.pry
+    @structure[row][column-1] = colour
+  end
   def integer_size_check(array)
     array.each{ |number| number >= 0 && number <= 250 ? check = true : check = false }
     return check
