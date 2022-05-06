@@ -56,6 +56,17 @@ class Canvas
     return check
     binding.pry
   end
+
+  def vertical_segment(column, row_1, row_2, colour)
+    sorted_rows = [row_1, row_2].sort
+    # this line takes 2 numbers(rows) and generates an array of all numbers between and inclusive of the 2 numbers(rows)
+    all_rows = (row_1..row_2).grep row_1..row_2
+    column = column
+    all_rows.each_with_index do |index, row|
+      @structure[index][column-1] = colour
+    end
+  end
+
 end
 
 

@@ -29,7 +29,8 @@ until running == false
 
   elsif input[0] == 'V' && input.match?(/\A[a-zA-z]\s\d{1,3}\s\d{1,3}\s\d{1,3}\s[a-zA-z]\z$/)
     # Draw a vertical segment of colour C in column X between rows Y1 and Y2 (inclusive).
-    puts 'Succesful trigger of the V command'
+    input_to_numbers = input.split(' ').map{ |string| string.to_i}
+    @canvas.vertical_segment(input_to_numbers[1], input_to_numbers[2], input_to_numbers[3], input[-1])
 
   elsif input[0] == 'H' && input.match?(/\A[a-zA-z]\s\d{1,3}\s\d{1,3}\s\d{1,3}\s[a-zA-z]\z$/)
     # Draw a horizontal segment of colour C in row Y between columns X1 and X2 (inclusive).
