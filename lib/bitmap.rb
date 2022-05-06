@@ -41,12 +41,14 @@ class Canvas
     end
   end
 
+
+
 end
 
 
 # TESTING CODE
-canvas = Canvas.new
-canvas.create_canvas(10,10)
+# canvas = Canvas.new
+# canvas.create_canvas(10,10)
 # puts canvas.structure
-canvas.show_canvas
+# canvas.show_canvas
 
