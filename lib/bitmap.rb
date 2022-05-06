@@ -1,3 +1,4 @@
+require 'pry'
 # Plan:
 
 # Initialise a running variable that will hold the session
@@ -22,7 +23,7 @@
 
   
 class Canvas 
-  attr_reader :structure
+  attr_accessor :structure
 
   def initialize
     @structure = {}
@@ -31,8 +32,8 @@ class Canvas
   def create_canvas(rows, columns)
     array = Array.new
     rows.times do |index|
-      @structure[index + 1] = array.push("O")
-    end
+      @structure[index + 1] = Array.new(columns, "O")
+    end    
   end
 
   def show_canvas
@@ -41,14 +42,43 @@ class Canvas
     end
   end
 
+  def clear_canvas
+    binding.pry
+    @structure
+  end
 
+  def colour_pixel(row, column, colour)
+    binding.pry
+    @structure[row][column-1] = colour
+  end
+  def integer_size_check(array)
+    array.each{ |number| number >= 0 && number <= 250 ? check = true : check = false }
+    return check
+    binding.pry
+  end
 
+  def vertical_segment(column, row_1, row_2, colour)
+    sorted_rows = [row_1, row_2].sort
+    # this line takes 2 numbers(rows) and generates an array of all numbers between and inclusive of the 2 numbers(rows)
+    all_rows = (row_1..row_2).grep row_1..row_2
+    all_rows.each_with_index do |index, row|
+      @structure[index][column-1] = colour
+    end
+  end
+
+  def horizontal_segment(column_1, column_2, row, colour)
+    sorted_rows = [column_1, column_2].sort
+    # this line takes 2 numbers(columns) and generates an array of all numbers between and inclusive of the 2 numbers(columns)
+    all_columns = (column_1..column_2).grep column_1..column_2
+
+    @structure[row].each_with_index do |e, index|
+      # if index is a match with a number from all_columns, change that element
+      if all_columns.include?(index+1)
+        @structure[row][index] = colour
+        binding.pry
+      end
+    end
+  end
 end
 
-
-# TESTING CODE
-# canvas = Canvas.new
-# canvas.create_canvas(10,10)
-# puts canvas.structure
-# canvas.show_canvas
 
