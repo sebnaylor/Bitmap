@@ -34,7 +34,6 @@ until running == false
 
   elsif input[0] == 'H' && input.match?(/\A[a-zA-z]\s\d{1,3}\s\d{1,3}\s\d{1,3}\s[a-zA-z]\z$/)
     # Draw a horizontal segment of colour C in row Y between columns X1 and X2 (inclusive).
-    puts 'Succesful trigger of the H command'
     input_to_numbers = input.split(' ').map{ |string| string.to_i}
     @canvas.horizontal_segment(input_to_numbers[1], input_to_numbers[2], input_to_numbers[3], input[-1])
 
@@ -45,6 +44,8 @@ until running == false
   elsif input[0] == 'W' && input.match?(/\A[a-zA-Z]\s\d{1,3}$/)
     # Scales the canvas with the given factor F (in percentage)
     puts 'Succesful trigger of the W command'
+    input_to_numbers = input.split(' ').map{ |string| string.to_i}
+    @canvas.scale(input_to_numbers[1])
 
   elsif input == 'S'
     @canvas.show_canvas

@@ -75,10 +75,30 @@ class Canvas
       # if index is a match with a number from all_columns, change that element
       if all_columns.include?(index+1)
         @structure[row][index] = colour
-        binding.pry
       end
     end
   end
+
+  def scale(percent)
+    row_num = @structure.keys[-1]
+    col_num = @structure[1].count
+    rows_to_add = row_num * (percent/100)
+    cols_to_add = @structure[1].count * (percent/100)
+    
+    # This adds the new rows & columns
+    rows_to_add.times do |index|
+      row_key = index + row_num + 1
+      @structure[row_key] = Array.new(cols_to_add, "O")
+    end
+
+    # This adds to the rows that already exist
+    (row_num + rows_to_add).times do |index|
+      binding.pry
+      @structure[index + 1] << Array.new(cols_to_add, "O")
+      @structure[index + 1].flatten!
+    end
+  end
+
 end
 
 
