@@ -41,7 +41,7 @@ until running == false
     # Fill the region R with the colour C. R is defined as:
     puts 'Succesful trigger of the F command'
 
-  elsif input[0] == 'W' && input.match?(/\A[a-zA-Z]\s\d{1,3}$/)
+  elsif input[0] == 'W' && input.match?(/\A[a-zA-Z]\s-?\d{1,3}$/)
     # Scales the canvas with the given factor F (in percentage)
     puts 'Succesful trigger of the W command'
     input_to_numbers = input.split(' ').map{ |string| string.to_i}

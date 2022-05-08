@@ -1,4 +1,4 @@
-require 'pry'
+# require 'pry'
 # Plan:
 
 # Initialise a running variable that will hold the session
@@ -25,11 +25,8 @@ require 'pry'
 class Canvas 
   attr_accessor :structure
 
-  def initialize
-    @structure = {}
-  end
-
   def create_canvas(rows, columns)
+    @structure = {}
     array = Array.new
     rows.times do |index|
       @structure[index + 1] = Array.new(columns, "O")
@@ -43,18 +40,18 @@ class Canvas
   end
 
   def clear_canvas
-    binding.pry
-    @structure
+    row_num = @structure.keys[-1]
+    col_num = @structure[1].count
+    create_canvas(row_num, col_num)
   end
 
   def colour_pixel(row, column, colour)
-    binding.pry
     @structure[row][column-1] = colour
   end
+
   def integer_size_check(array)
     array.each{ |number| number >= 0 && number <= 250 ? check = true : check = false }
     return check
-    binding.pry
   end
 
   def vertical_segment(column, row_1, row_2, colour)
@@ -82,23 +79,29 @@ class Canvas
   def scale(percent)
     row_num = @structure.keys[-1]
     col_num = @structure[1].count
-    rows_to_add = row_num * (percent/100)
-    cols_to_add = @structure[1].count * (percent/100)
+    rows_to_change = (row_num * percent/100).abs
+    cols_to_change = (col_num * percent/100).abs
     
-    # This adds the new rows & columns
-    rows_to_add.times do |index|
-      row_key = index + row_num + 1
-      @structure[row_key] = Array.new(cols_to_add, "O")
-    end
-
-    # This adds to the rows that already exist
-    (row_num + rows_to_add).times do |index|
-      binding.pry
-      @structure[index + 1] << Array.new(cols_to_add, "O")
-      @structure[index + 1].flatten!
+    if percent >= 100
+      # This adds the new rows & columns
+      rows_to_change.times do |index|
+        row_key = index + row_num + 1
+        @structure[row_key] = Array.new(cols_to_change, "O")
+      end
+      # This adds to the rows that already exist
+      (row_num + rows_to_change).times do |index|
+        @structure[index + 1] << Array.new(cols_to_change, "O")
+        @structure[index + 1].flatten!
+      end
+    
+    elsif percent < 100
+      rows_to_change.times do |index|
+         @structure[index +1].pop(cols_to_change)
+      end
+    
+      cols_to_change.times do |index|
+        @structure.delete(@structure.keys.last)
+      end
     end
   end
-
 end
-
-
