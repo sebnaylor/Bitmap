@@ -63,10 +63,10 @@ describe Canvas do
       })
   end
 
-  it 'canvas scale correctly scales at 100' do
+  it 'canvas_scale correctly scales at 200' do
     canvas = Canvas.new
     canvas.create_canvas(4, 8)
-    canvas.scale(100)
+    canvas.scale(200)
     expect(canvas.structure).to eq({
       1=>['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
       2=>['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
@@ -79,7 +79,7 @@ describe Canvas do
       })
     end
 
-  it 'canvas scale correctly scales at 50' do
+  it 'canvas_scale correctly scales at 50' do
     canvas = Canvas.new
     canvas.create_canvas(4, 8)
     canvas.scale(50)
@@ -89,4 +89,21 @@ describe Canvas do
       })
   end
 
+  it 'canvas_fill_region correctly shades a region with colour' do
+    canvas = Canvas.new
+    canvas.create_canvas(6, 8)
+    canvas.horizontal_segment(2, 7, 2, 'I')
+    canvas.horizontal_segment(2, 7, 5, 'I')
+    canvas.vertical_segment(2, 2, 5, 'I')
+    canvas.vertical_segment(7, 2, 5, 'I')
+    canvas.fill_region(4, 5, 'I')
+    expect(canvas.structure).to eq({
+      1=>['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
+      2=>['O', 'I', 'I', 'I', 'I', 'I', 'I', 'O'],
+      3=>['O', 'I', 'I', 'I', 'I', 'I', 'I', 'O'],
+      4=>['O', 'I', 'I', 'I', 'I', 'I', 'I', 'O'],
+      5=>['O', 'I', 'I', 'I', 'I', 'I', 'I', 'O'],
+      6=>['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
+    })
+    end
 end
